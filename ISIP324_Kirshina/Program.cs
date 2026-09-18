@@ -54,8 +54,8 @@ namespace ISIP324_Kirshina
                     case "1":
                         AddProduct();
                         break;
-                    //case "2":
-                    // DeleteProduct();
+                    case "2":
+                        DeleteProduct();
                     // break;
                     //case "3":
                     // OrderDelivery();
@@ -66,8 +66,8 @@ namespace ISIP324_Kirshina
                     //case "5":
                     // SearchProduct();
                     // break;
-                    //case "0":
-                    // return;
+                    case "0":
+                        return;
                     default:
                         Console.WriteLine("Такого варианта нет");
                         break;
@@ -117,6 +117,38 @@ namespace ISIP324_Kirshina
 
                     products.Add(newProduct);
                     Console.WriteLine($"Товар {name} добвлен с кодом {newProduct.code} в кол-ве {quantity}, категории {newProduct.category}");
+                }
+                void DeleteProduct()
+                {
+                    Console.WriteLine("Введите код товара, который хотите удалить:");
+                    string input = Console.ReadLine();
+
+                    int codeToDelete;
+                    bool isNumber = int.TryParse (input, out codeToDelete);
+
+                    if (isNumber == false)
+                    {
+
+                        Console.WriteLine("Код должен быть числом!");
+                        return;
+                    }
+                    bool found = false;
+
+                    for (int i = 0; i < products.Count(); i++)
+                    {
+                        if (products[i].code == codeToDelete)
+                        {
+                            string deletedName = products[i].name;
+                            products.RemoveAt(i);
+                            Console.WriteLine($"Товар {deletedName} с кодом {codeToDelete} успешно удален.");
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found == false)
+                    {
+                        Console.WriteLine("Товар с таким кодом не найден!");
+                    }
                 }
             }
         }
