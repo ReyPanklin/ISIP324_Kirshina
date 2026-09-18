@@ -57,16 +57,16 @@ namespace ISIP324_Kirshina
                         break;
                     case "2":
                         DeleteProduct();
-                    // break;
-                    //case "3":
-                    // OrderDelivery();
-                    // break;
-                    //case "4":
-                    // SellProdcut();
-                    // break;
-                    //case "5":
-                    // SearchProduct();
-                    // break;
+                        break;
+                    case "3":
+                        OrderDelivery();
+                        break;
+                    case "4":
+                        SellProdcut();
+                        break;
+                    case "5":
+                        SearchProduct();
+                        break;
                     case "0":
                         return;
                     default:
@@ -238,6 +238,32 @@ namespace ISIP324_Kirshina
                     foundProduct.quantity -= sellQuantity;
                     foundProduct.isThere = foundProduct.quantity > 0;
                     Console.WriteLine($"Продажа успешна! Осталось на складе '{foundProduct.name}': {foundProduct.quantity} шт.");
+                }
+                void SearchProduct()
+                {
+                    Console.WriteLine("Введите код, часть названия или номер категории (1-5) для поиска: ");
+                    string input = Console.ReadLine().Trim();
+
+                    bool foundSomething = false;
+
+                    Console.WriteLine("Результаты поиска:");
+
+                    for (int i = 0; i < products.Count; i++)
+                    {
+                        Product currentProduct = products[i];
+                        bool isMatchCode = currentProduct.code.ToString() == input;
+                        bool isMatchName = currentProduct.name.Contains(input);
+                        bool isMatchCategory = ((int)currentProduct.category).ToString() == input;
+                        if (isMatchCode || isMatchName || isMatchCategory)
+                        {
+                            Console.WriteLine($"Код: {currentProduct.code}, название: {currentProduct.name}, цена: {currentProduct.cost}, кол-во: {currentProduct.quantity}, категория: {currentProduct.category}");
+                            foundSomething = true;
+                        }
+                    }
+                    if (foundSomething == false)
+                    {
+                        Console.WriteLine("Ничего не найдено.");
+                    }
                 }
             }
         }
