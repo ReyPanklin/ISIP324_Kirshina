@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -184,12 +185,59 @@ namespace ISIP324_Kirshina
                     bool isQuantityValid = int.TryParse(inputQuantity, out addQuantity);
                     if (isQuantityValid == false || addQuantity <= 0)
                     {
-                        Console.WriteLine("Кол-во поставки должно быть неотрицательным числом и больше 0!");
+                        Console.WriteLine("Кол-во поставки должно быть больше 0!");
                         return;
                     }
                     foundProduct.quantity += addQuantity;
                     foundProduct.isThere = true;
                     Console.WriteLine($"Поставка принята! Теперь на складе {foundProduct.name}: {foundProduct.quantity} шт.");
+                }
+                void SellProduct()
+                {
+                    Console.WriteLine("Введите код товара для продажи:");
+                    string inputCode = Console.ReadLine();
+                    int codeToSell;
+                    bool isCodeValid = int.TryParse(inputCode, out codeToSell);
+
+                    if (isCodeValid == false)
+                    {
+                        Console.WriteLine("Код должен быть числом!");
+                        return;
+                    }
+                    Product foundProduct = null;
+
+                    for (int i = 0; i < products.Count(); i++)
+                    {
+                        if (products[i].code == codeToSell)
+                        {
+                            foundProduct = products[i];
+                            break;
+                        }
+                    }
+
+                    if (foundProduct == null)
+                    {
+                        Console.WriteLine("Товар с таким кодом не найден");
+                        return;
+                    }
+                    Console.WriteLine($"В наличии: {foundProduct.quantity}. Сколько продать?");
+                    string inputQuantity = Console.ReadLine();
+
+                    int sellQuantity;
+                    bool isQuantityValid = int.TryParse(inputQuantity, out sellQuantity);
+                    if (isQuantityValid == false || sellQuantity <= 0)
+                    {
+                        Console.WriteLine("Кол-во должно быть числом больше нуля");
+                        return;
+                    }
+                    if (sellQuantity > foundProduct.quantity)
+                    {
+                        Console.WriteLine($"Нельзя продать больше чем есть в наличии (всего {foundProduct.quantity})");
+                        return;
+                    }
+                    foundProduct.quantity -= sellQuantity;
+                    foundProduct.isThere = foundProduct.quantity > 0;
+                    Console.WriteLine($"Продажа успешна! Осталось на складе '{foundProduct.name}': {foundProduct.quantity} шт.");
                 }
             }
         }
