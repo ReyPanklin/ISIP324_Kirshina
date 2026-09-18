@@ -150,6 +150,47 @@ namespace ISIP324_Kirshina
                         Console.WriteLine("Товар с таким кодом не найден!");
                     }
                 }
+                void OrderDelivery()
+                {
+                    Console.WriteLine("Введите код для поставки:");
+                    string inputCode = Console.ReadLine();
+                    int codeToSupply;
+                    bool isCodeValid = int.TryParse(inputCode, out codeToSupply);
+
+                    if (isCodeValid == false)
+                    {
+                        Console.WriteLine("Код должен быть числом!");
+                        return;
+                    }
+                    Product foundProduct = null;
+
+                    for (int i = 0; i < products.Count(); i++)
+                    {
+                        if (products[i].code == codeToSupply)
+                        {
+                            foundProduct = products[i];
+                            break;
+                        }
+                    }
+
+                    if (foundProduct == null)
+                    {
+                        Console.WriteLine("Товар с таким кодом не найден");
+                        return;
+                    }
+                    Console.WriteLine($"Текущее кол-во - {foundProduct.name}: {foundProduct.quantity}. Сколько добавить?");
+                    string inputQuantity = Console.ReadLine();
+                    int addQuantity;
+                    bool isQuantityValid = int.TryParse(inputQuantity, out addQuantity);
+                    if (isQuantityValid == false || addQuantity <= 0)
+                    {
+                        Console.WriteLine("Кол-во поставки должно быть неотрицательным числом и больше 0!");
+                        return;
+                    }
+                    foundProduct.quantity += addQuantity;
+                    foundProduct.isThere = true;
+                    Console.WriteLine($"Поставка принята! Теперь на складе {foundProduct.name}: {foundProduct.quantity} шт.");
+                }
             }
         }
     }
