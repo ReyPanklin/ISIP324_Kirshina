@@ -46,6 +46,24 @@ namespace ISIP324_Kirshina
 
             int counts = input.Split(new char[] { '.', '!', '?' }, StringSplitOptions.RemoveEmptyEntries).Length;
             Console.WriteLine($"Предложений в тексте: {counts}");
+
+            string vowels = "аеёиоуыэюяАЕЁИОУЫЭЮЯ";
+            string consonants = "бвгджзклмнпрстфхцчшщйБВГДЖЗКЛМНПРСТФХЦЧШЩЙ";
+            int countVowels = 0;
+            int countConsonants = 0;
+            
+            for (int i = 0; i< input.Length; i++)
+            {
+                if (vowels.Contains(input[i]))
+                {
+                    countVowels++;
+                } else if (consonants.Contains(input[i]))
+                {
+                    countConsonants++;
+                }
+            }
+            Console.WriteLine($"Гласных букв: {countVowels}");
+            Console.WriteLine($"Согласных букв: {countConsonants}");
         }
     }
 }
