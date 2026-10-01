@@ -22,6 +22,14 @@ namespace ISIP324_Kirshina
                 Console.WriteLine("Условие ввода выполнено неверно!");
                 return;
             }
+
+            string[] words = input.Split(' ');
+            int count = 0;
+            for (int i = 0; i < words.Length; i++)
+            {
+                count++;
+            }
+            Console.WriteLine($"Слов в тексте: {count}");
         }
     }
 }
