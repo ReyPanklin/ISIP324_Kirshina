@@ -64,6 +64,19 @@ namespace ISIP324_Kirshina
             }
             Console.WriteLine($"Гласных букв: {countVowels}");
             Console.WriteLine($"Согласных букв: {countConsonants}");
+
+            string maxword = words[0];
+            int maxlength = words[0].Length;
+            for (int i = 1; i < words.Length; i++)
+            {
+                string cleanWord = words[i].Trim('.', ',', '!', '?', ':', ';', '-', '(', ')');
+                if (cleanWord.Length > maxlength)
+                {
+                    maxlength = cleanWord.Length;
+                    maxword = cleanWord;
+                }
+            }
+            Console.WriteLine($"Самое длинное слово: {maxword}");
         }
     }
 }
