@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,6 +31,18 @@ namespace ISIP324_Kirshina
                 count++;
             }
             Console.WriteLine($"Слов в тексте: {count}");
+
+            string minword = words[0];
+            int minlength = words[0].Length;
+            for (int i = 1; i < words.Length; i++)
+            {
+                if (words[i].Length < minlength)
+                {
+                    minlength = words[i].Length;
+                    minword = words[i];
+                }
+            }
+            Console.WriteLine($"Самое короткое слово: {minword}");
         }
     }
 }
