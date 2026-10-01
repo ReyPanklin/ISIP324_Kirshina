@@ -43,6 +43,9 @@ namespace ISIP324_Kirshina
                 }
             }
             Console.WriteLine($"Самое короткое слово: {minword}");
+
+            int counts = input.Split(new char[] { '.', '!', '?' }, StringSplitOptions.RemoveEmptyEntries).Length;
+            Console.WriteLine($"Предложений в тексте: {counts}");
         }
     }
 }
