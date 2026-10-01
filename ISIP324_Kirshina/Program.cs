@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,17 @@ namespace ISIP324_Kirshina
     {
         static void Main(string[] args)
         {
+            List<string> text = new List<string>();
+            Console.WriteLine("Введите текст. Минимум 100 символов.");
+            string input = Console.ReadLine();
+            if (input.Length >= 100)
+            {
+                Console.WriteLine("Условие ввода выполнено");
+            }else
+            {
+                Console.WriteLine("Условие ввода выполнено неверно!");
+                return;
+            }
         }
     }
 }
