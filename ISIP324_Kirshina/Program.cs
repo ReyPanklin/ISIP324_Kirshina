@@ -10,18 +10,32 @@ namespace ISIP324_Kirshina
 {
     internal class Program
     {
+        class TextStatistics
+        {
+            public int WordCount;
+            public string MinWord;
+            public int SentenceCount;
+            public int VowelCount;
+            public int ConsonantCount;
+            public string MaxWord;
+            public Dictionary<char, int> LetterFrequency;
+        }
         static void Main(string[] args)
         {
             List<string> text = new List<string>();
+            List<TextStatistics> allStatistics = new List<TextStatistics>();
             while (true)
             {
-                Console.WriteLine("Введите текст. Минимум 100 символов.");
+                Console.WriteLine("Введите текст. Минимум 100 символов. Для выхода напишите 0");
                 string input = Console.ReadLine();
                 if (input.Length >= 100)
                 {
                     Console.WriteLine("Условие ввода выполнено");
                 }
-                else
+                else if(input == "0")
+                {
+                    break;
+                } else
                 {
                     Console.WriteLine("Условие ввода выполнено неверно!");
                     return;
@@ -104,6 +118,7 @@ namespace ISIP324_Kirshina
                 {
                     Console.WriteLine($"{pair.Key} - {pair.Value} раз");
                 }
+
             }
         }
     }
