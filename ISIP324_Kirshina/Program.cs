@@ -81,6 +81,29 @@ namespace ISIP324_Kirshina
                     }
                 }
                 Console.WriteLine($"Самое длинное слово: {maxword}");
+
+                Dictionary<char, int> letterFrequency = new Dictionary<char, int>();
+                for (int i = 0; i < input.Length; i++)
+                {
+                    char c = input[i];
+                    if (char.IsLetter(c))
+                    {
+                        c = char.ToLower(c);
+                        if (letterFrequency.ContainsKey(c))
+                        {
+                            letterFrequency[c]++;
+                        }
+                        else
+                        {
+                            letterFrequency[c] = 1;
+                        }
+                    }
+                }
+                Console.WriteLine("Частота встречаемости букв:");
+                foreach (KeyValuePair<char, int> pair in letterFrequency)
+                {
+                    Console.WriteLine($"{pair.Key} - {pair.Value} раз");
+                }
             }
         }
     }
