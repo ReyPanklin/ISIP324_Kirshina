@@ -135,7 +135,32 @@ namespace ISIP324_Kirshina
                         Console.WriteLine("Статистика сохранена");
                         break;
                     case "2":
-
+                        Console.WriteLine("Статистика:");
+                        if (allStatistics.Count == 0)
+                        {
+                            Console.WriteLine("История пуста. Сначала введите текст.");
+                        }
+                        else
+                        {
+                            for (int i = 0; i < allStatistics.Count; i++)
+                            {
+                                Console.WriteLine($"Текст №{i + 1}");
+                                Console.WriteLine();
+                                Console.WriteLine($"Слов: {allStatistics[i].WordCount}");
+                                Console.WriteLine($"Предложений: {allStatistics[i].SentenceCount}");
+                                Console.WriteLine($"Короткое слово: {allStatistics[i].MinWord}");
+                                Console.WriteLine($"Длинное слово: {allStatistics[i].MaxWord}");
+                                Console.WriteLine($"Гласных: {allStatistics[i].VowelCount}, Согласных: {allStatistics[i].ConsonantCount}");
+                                Console.WriteLine("Частота букв:");
+                                foreach (var pair in allStatistics[i].LetterFrequency)
+                                {
+                                    Console.Write($"{pair.Key}({pair.Value}) ");
+                                }
+                            }
+                        }
+                        break;
+                    case "0":
+                        return;
                 }
             }
         }
