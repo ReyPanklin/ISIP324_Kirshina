@@ -53,6 +53,12 @@ namespace ISIP324_Kirshina
         {
             int nextID = 1;
             List<Books> books = new List<Books>();
+
+            books.Add(new Books(nextID++, "Гарри Поттер", "Дж. Роулинг", Genre.Fantasy, 1997, 800));
+            books.Add(new Books(nextID++, "Убийство в Восточном экспрессе", "Агата Кристи", Genre.Detective, 1934, 500));
+            books.Add(new Books(nextID++, "Оно", "Стивен Кинг", Genre.Horror, 1986, 750));
+            books.Add(new Books(nextID++, "Девушка с татуировкой дракона", "С. Ларссон", Genre.Thriller, 2005, 650));
+            books.Add(new Books(nextID++, "Война и мир", "Л. Толстой", Genre.Historic, 1869, 1200));
         }
     }
 }
