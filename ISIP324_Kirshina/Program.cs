@@ -31,10 +31,10 @@ namespace ISIP324_Kirshina
             {
                 this.ID = ID;
                 this.name = name;
-                author = author;
-                Genre = Genre;
-                year = year;
-                price = price;
+                this.author = author;
+                this.Genre = Genre;
+                this.year = year;
+                this.price = price;
             }
 
             public void ShowInfo()
