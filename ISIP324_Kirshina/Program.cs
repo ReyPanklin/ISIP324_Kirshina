@@ -59,6 +59,53 @@ namespace ISIP324_Kirshina
             books.Add(new Books(nextID++, "Оно", "Стивен Кинг", Genre.Horror, 1986, 750));
             books.Add(new Books(nextID++, "Девушка с татуировкой дракона", "С. Ларссон", Genre.Thriller, 2005, 650));
             books.Add(new Books(nextID++, "Война и мир", "Л. Толстой", Genre.Historic, 1869, 1200));
+
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("МЕНЮ");
+                Console.WriteLine("1. Добавить книгу");
+                Console.WriteLine("2. Удалить книгу по ID");
+                Console.WriteLine("3. Найти книгу");
+                Console.WriteLine("4. Отсортировать книги");
+                Console.WriteLine("5. Самая дорогая и дешевая книга");
+                Console.WriteLine("6. Количество книг по авторам");
+                Console.WriteLine("7. Показать все книги");
+                Console.WriteLine("0. Выход");
+
+                string choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    //case "1":
+                    //    AddBook();
+                    //    break;
+                    //case "2":
+                    //    RemoveBook();
+                    //    break;
+                    //case "3":
+                    //    FindBook();
+                    //    break;
+                    //case "4":
+                    //    SortBooks();
+                    //    break;
+                    //case "5":
+                    //    ShowMinMax();
+                    //    break;
+                    //case "6":
+                    //    GroupByAuthor();
+                    //    break;
+                    //case "7":
+                    //    ShowAll();
+                    //    break;
+                    case "0":
+                        return;
+                    default:
+                        Console.WriteLine("Неверный ввод. Нажмите Enter...");
+                        Console.ReadLine();
+                        break;
+                }
+            }
         }
     }
 }
