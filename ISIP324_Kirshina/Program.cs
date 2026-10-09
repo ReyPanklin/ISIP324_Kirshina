@@ -87,9 +87,9 @@ namespace ISIP324_Kirshina
                     case "3":
                         FindBook();
                         break;
-                    //case "4":
-                    //    SortBooks();
-                    //    break;
+                    case "4":
+                        SortBooks();
+                        break;
                     //case "5":
                     //    ShowMinMax();
                     //    break;
@@ -202,7 +202,6 @@ namespace ISIP324_Kirshina
                     Console.WriteLine("2. Поиск по автору");
                     Console.WriteLine("3. Поиск по жанру");
                     Console.WriteLine("0. Назад в меню");
-                    Console.Write("Ваш выбор: ");
                     string choice1 = Console.ReadLine();
 
                     int foundCount = 0;
@@ -280,6 +279,81 @@ namespace ISIP324_Kirshina
                     else
                     {
                         Console.WriteLine($"Найдено книг: {foundCount}");
+                    }
+
+                    Console.WriteLine("Нажмите Enter, чтобы вернуться в меню");
+                    Console.ReadLine();
+                }
+                void SortBooks()
+                {
+                    Console.Clear();
+                    Console.WriteLine("Сортировка книг:");
+                    Console.WriteLine("1. Сортировать по названию");
+                    Console.WriteLine("2. Сортировать по году");
+                    Console.WriteLine("0. Назад в меню");
+                    string choice2 = Console.ReadLine();
+
+                    switch (choice2)
+                    {
+                        case "1":
+                            Console.Write("Выберите направление:");
+                            Console.WriteLine("1. По возрастанию (А -> Я)");
+                            Console.WriteLine("2. По убыванию (Я -> А)");
+                            string dir1 = Console.ReadLine();
+
+                            if (dir1 == "1")
+                            {
+                                books = books.OrderBy(b => b.name).ToList();
+                                Console.WriteLine("Книги отсортированы по названию (А -> Я).");
+                            }
+                            else if (dir1 == "2")
+                            {
+                                books = books.OrderByDescending(b => b.name).ToList();
+                                Console.WriteLine("Книги отсортированы по названию (Я -> А).");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Неверный ввод!");
+                                Console.ReadLine();
+                                return;
+                            }
+                            break;
+                        case "2":
+                            Console.Write("Выберите направление:");
+                            Console.WriteLine("1. По возрастанию (сначала старые)");
+                            Console.WriteLine("2. По убыванию (сначала новые)");
+                            string dir2 = Console.ReadLine();
+
+                            if (dir2 == "1")
+                            {
+                                books = books.OrderBy(b => b.year).ToList();
+                                Console.WriteLine("Книги отсортированы по году (сначала старые).");
+                            }
+                            else if (dir2 == "2")
+                            {
+                                books = books.OrderByDescending(b => b.year).ToList();
+                                Console.WriteLine("Книги отсортированы по году (сначала новые).");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Неверный ввод!");
+                                Console.ReadLine();
+                                return;
+                            }
+                            break;
+                        case "0":
+                            return;
+
+                        default:
+                            Console.WriteLine("Неверный ввод!");
+                            Console.WriteLine("Нажмите Enter");
+                            Console.ReadLine();
+                            return;
+                    }
+                    Console.WriteLine("Результат:");
+                    foreach (Books book in books)
+                    {
+                        book.ShowInfo();
                     }
 
                     Console.WriteLine("Нажмите Enter, чтобы вернуться в меню");
