@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -105,20 +106,30 @@ namespace ISIP324_Kirshina
                         Console.ReadLine();
                         break;
                 }
-                //void AddBook()
-                //{
-                //    Console.WriteLine("Введите двнные о книге по шаблону:");
-                //    Console.WriteLine("Название; Автор; Жанр, Год выпуска; Цена");
-                //    string book = Console.ReadLine();
-                //    string[] parts = book.Split(';');
-                //    if (parts.Length != 5)
-                //    {
-                //        Console.WriteLine("Неправильный формат ввода! Напишите информацию по шаблону!");
-                //        Console.ReadLine();
-                //        return;
-                //    }
-                    
-                //}
+                void AddBook()
+                {
+                    Console.WriteLine("Введите двнные о книге по шаблону:");
+                    Console.WriteLine("Название; Автор; Жанр, Год выпуска; Цена");
+                    string book = Console.ReadLine();
+                    string[] parts = book.Split(';');
+                    if (parts.Length != 5)
+                    {
+                        Console.WriteLine("Неправильный формат ввода! Напишите информацию по шаблону!");
+                        Console.ReadLine();
+                        return;
+                    } else {
+                        string name = parts[0].Trim();
+                        string author = parts[1].Trim();
+                        string genre = parts[2].Trim();
+                        uint year = Convert.ToUInt32(parts[3].Trim());
+                        uint cost = Convert.ToUInt32(parts[4].Trim());
+
+
+                        //products.Add(product);
+                        //costs.Add(cost);
+                        //Console.WriteLine($"Записано: {product} - {cost} рублей");
+                    }
+                }
                 //void RemoveBook()
                 //{
 
