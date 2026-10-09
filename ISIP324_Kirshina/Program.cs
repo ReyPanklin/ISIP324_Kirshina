@@ -110,6 +110,7 @@ namespace ISIP324_Kirshina
                 {
                     Console.WriteLine("Введите двнные о книге по шаблону:");
                     Console.WriteLine("Название; Автор; Жанр, Год выпуска; Цена");
+                    Console.WriteLine("Категории: 1 - Фэнтэзи, 2 - Детектив, 3 - Хоррор, 4 - Слэшер, 5 - Историческая, 6 - Триллер.");
                     string book = Console.ReadLine();
                     string[] parts = book.Split(';');
                     if (parts.Length != 5)
@@ -117,23 +118,48 @@ namespace ISIP324_Kirshina
                         Console.WriteLine("Неправильный формат ввода! Напишите информацию по шаблону!");
                         Console.ReadLine();
                         return;
-                    } else {
+                    }
+                    else
+                    {
                         string name = parts[0].Trim();
+                        if (name.Length == 0)
+                        {
+                            Console.WriteLine("Строка не может быть пустой!");
+                            return;
+                        }
+
                         string author = parts[1].Trim();
-                        string genre = parts[2].Trim();
+                        if (author.Length == 0)
+                        {
+                            Console.WriteLine("Автор не может быть пустым!");
+                            return;
+                        }
+
+                        int genrenum = Convert.ToInt32(parts[2].Trim());
+                        if (genrenum < 1 || genre > 6)
+                        {
+                            Console.WriteLine("Категория должна быть в диапазоне от 1 до 6!");
+                            return;
+                        }
+                        Genre genre = (Genre)genrenum;
+
                         uint year = Convert.ToUInt32(parts[3].Trim());
+                        if (year <= 0 || year > 2026)
+                        {
+                            Console.WriteLine("Год должен быть в диапазоне от 1 до 2026.");
+                        }
+
                         uint cost = Convert.ToUInt32(parts[4].Trim());
-
-
-                        //products.Add(product);
-                        //costs.Add(cost);
-                        //Console.WriteLine($"Записано: {product} - {cost} рублей");
+                        if (cost <= 0)
+                        {
+                            Console.WriteLine("Цена не может быть отрицательной и не может равняться нулю!");
+                            return;
+                        }
+                        Books newBook = new Books(nextID, name, author, genre, year, cost);
+                        books.Add(newBook);
+                        nextID++;
                     }
                 }
-                //void RemoveBook()
-                //{
-
-                //}
             }
         }
     }
