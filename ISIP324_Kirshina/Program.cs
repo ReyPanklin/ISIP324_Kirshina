@@ -55,10 +55,10 @@ namespace ISIP324_Kirshina
             int nextID = 1;
             List<Books> books = new List<Books>();
 
-            books.Add(new Books(nextID++, "Гарри Поттер", "Дж. Роулинг", Genre.Fantasy, 1997, 800));
-            books.Add(new Books(nextID++, "Убийство в Восточном экспрессе", "Агата Кристи", Genre.Detective, 1934, 500));
+            books.Add(new Books(nextID++, "Худеющий", "Стивен Кинг", Genre.Thriller, 1984, 800));
+            books.Add(new Books(nextID++, "Алиса в старне чудес", "Льюис Кэрролл", Genre.Fantasy, 1865, 500));
             books.Add(new Books(nextID++, "Оно", "Стивен Кинг", Genre.Horror, 1986, 750));
-            books.Add(new Books(nextID++, "Девушка с татуировкой дракона", "С. Ларссон", Genre.Thriller, 2005, 650));
+            books.Add(new Books(nextID++, "Дракула", "Брэм Стокер", Genre.Horror, 1897, 650));
             books.Add(new Books(nextID++, "Война и мир", "Л. Толстой", Genre.Historic, 1869, 1200));
 
             while (true)
@@ -96,9 +96,9 @@ namespace ISIP324_Kirshina
                     //case "6":
                     //    GroupByAuthor();
                     //    break;
-                    //case "7":
-                    //    ShowAll();
-                    //    break;
+                    case "7":
+                        ShowAll();
+                        break;
                     case "0":
                         return;
                     default:
@@ -108,7 +108,7 @@ namespace ISIP324_Kirshina
                 }
                 void AddBook()
                 {
-                    Console.WriteLine("Введите двнные о книге по шаблону:");
+                    Console.WriteLine("Введите данные о книге по шаблону:");
                     Console.WriteLine("Название; Автор; Жанр, Год выпуска; Цена");
                     Console.WriteLine("Категории: 1 - Фэнтэзи, 2 - Детектив, 3 - Хоррор, 4 - Слэшер, 5 - Историческая, 6 - Триллер.");
                     string book = Console.ReadLine();
@@ -136,7 +136,7 @@ namespace ISIP324_Kirshina
                         }
 
                         int genrenum = Convert.ToInt32(parts[2].Trim());
-                        if (genrenum < 1 || genre > 6)
+                        if (genrenum < 1 || genrenum > 6)
                         {
                             Console.WriteLine("Категория должна быть в диапазоне от 1 до 6!");
                             return;
@@ -147,6 +147,8 @@ namespace ISIP324_Kirshina
                         if (year <= 0 || year > 2026)
                         {
                             Console.WriteLine("Год должен быть в диапазоне от 1 до 2026.");
+                            Console.ReadLine();
+                            return;
                         }
 
                         uint cost = Convert.ToUInt32(parts[4].Trim());
@@ -159,6 +161,23 @@ namespace ISIP324_Kirshina
                         books.Add(newBook);
                         nextID++;
                     }
+                }
+                void ShowAll()
+                {
+                    if (books.Count == 0 )
+                    {
+                        Console.WriteLine("Список книг пуст.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Список всех книг:");
+                        foreach (Books book in books)
+                        {
+                            book.ShowInfo();
+                        }
+                    }
+                    Console.WriteLine("Нажмите Enter, чтобы вернуться в меню");
+                    Console.ReadLine();
                 }
             }
         }
