@@ -84,9 +84,9 @@ namespace ISIP324_Kirshina
                     case "2":
                         RemoveBook();
                         break;
-                    //case "3":
-                    //    FindBook();
-                    //    break;
+                    case "3":
+                        FindBook();
+                        break;
                     //case "4":
                     //    SortBooks();
                     //    break;
@@ -191,7 +191,98 @@ namespace ISIP324_Kirshina
                     {
                         Console.WriteLine($"Книга с ID {IDToRemove} не найдена.");
                     }
-                    Console.WriteLine("Нажмите Enter");
+                    Console.WriteLine("Нажмите Enter, чтобы вернуться в меню.");
+                    Console.ReadLine();
+                }
+                void FindBook()
+                {
+                    Console.Clear();
+                    Console.WriteLine("Поиск книги:");
+                    Console.WriteLine("1. Поиск по названию");
+                    Console.WriteLine("2. Поиск по автору");
+                    Console.WriteLine("3. Поиск по жанру");
+                    Console.WriteLine("0. Назад в меню");
+                    Console.Write("Ваш выбор: ");
+                    string choice1 = Console.ReadLine();
+
+                    int foundCount = 0;
+
+                    switch (choice1)
+                    {
+                        case "1":
+                            Console.Write("Введите часть или полное название книги:");
+                            string searchName = Console.ReadLine().Trim().ToLower();
+
+                            Console.WriteLine("Результаты поиска:");
+                            for (int i = 0; i < books.Count; i++)
+                            {
+                                if (books[i].name.ToLower().Contains(searchName))
+                                {
+                                    books[i].ShowInfo();
+                                    foundCount++;
+                                }
+                            }
+                            break;
+                        case "2":
+                            Console.Write("Введите часть или полное имя автора:");
+                            string searchAuthor = Console.ReadLine().Trim().ToLower();
+
+                            Console.WriteLine("Результаты поиска:");
+                            for (int i = 0; i < books.Count; i++)
+                            {
+                                if (books[i].author.ToLower().Contains(searchAuthor))
+                                {
+                                    books[i].ShowInfo();
+                                    foundCount++;
+                                }
+                            }
+                            break;
+                        case "3":
+                            Console.WriteLine("Категории: 1 - Fantasy, 2 - Detective, 3 - Horror, 4 - Slasher, 5 - Historic, 6 - Thriller.");
+                            Console.Write("Введите номер категории:");
+                            string genreInput = Console.ReadLine();
+
+                            if (!int.TryParse(genreInput, out int genreNum) || genreNum < 1 || genreNum > 6)
+                            {
+                                Console.WriteLine("Ошибка: нужно ввести число от 1 до 6!");
+                                Console.WriteLine("Нажмите Enter");
+                                Console.ReadLine();
+                                return;
+                            }
+
+                            Genre searchGenre = (Genre)genreNum;
+
+                            Console.WriteLine("Резульатаы поиска:");
+                            for (int i = 0; i < books.Count; i++)
+                            {
+                                if (books[i].Genre == searchGenre)
+                                {
+                                    books[i].ShowInfo();
+                                    foundCount++;
+                                }
+                            }
+                            break;
+
+                        case "0":
+                            return;
+
+                        default:
+                            Console.WriteLine("Неверный ввод!");
+                            Console.WriteLine("Нажмите Enter");
+                            Console.ReadLine();
+                            return;
+                    }
+
+                    if (foundCount == 0)
+                    {
+                        Console.WriteLine("Книги по вашему запросу не найдены.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Найдено книг: {foundCount}");
+                    }
+
+                    Console.WriteLine("Нажмите Enter, чтобы вернуться в меню");
                     Console.ReadLine();
                 }
                 void ShowAll()
@@ -208,7 +299,7 @@ namespace ISIP324_Kirshina
                             book.ShowInfo();
                         }
                     }
-                    Console.WriteLine("Нажмите Enter, чтобы вернуться в меню");
+                    Console.WriteLine("Нажмите Enter, чтобы вернуться в меню.");
                     Console.ReadLine();
                 }
             }
