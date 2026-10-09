@@ -77,9 +77,9 @@ namespace ISIP324_Kirshina
 
                 switch (choice)
                 {
-                    //case "1":
-                    //    AddBook();
-                    //    break;
+                    case "1":
+                        AddBook();
+                        break;
                     //case "2":
                     //    RemoveBook();
                     //    break;
@@ -101,10 +101,28 @@ namespace ISIP324_Kirshina
                     case "0":
                         return;
                     default:
-                        Console.WriteLine("Неверный ввод. Нажмите Enter...");
+                        Console.WriteLine("Неверный ввод. Нажмите Enter.");
                         Console.ReadLine();
                         break;
                 }
+                //void AddBook()
+                //{
+                //    Console.WriteLine("Введите двнные о книге по шаблону:");
+                //    Console.WriteLine("Название; Автор; Жанр, Год выпуска; Цена");
+                //    string book = Console.ReadLine();
+                //    string[] parts = book.Split(';');
+                //    if (parts.Length != 5)
+                //    {
+                //        Console.WriteLine("Неправильный формат ввода! Напишите информацию по шаблону!");
+                //        Console.ReadLine();
+                //        return;
+                //    }
+                    
+                //}
+                //void RemoveBook()
+                //{
+
+                //}
             }
         }
     }
