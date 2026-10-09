@@ -81,9 +81,9 @@ namespace ISIP324_Kirshina
                     case "1":
                         AddBook();
                         break;
-                    //case "2":
-                    //    RemoveBook();
-                    //    break;
+                    case "2":
+                        RemoveBook();
+                        break;
                     //case "3":
                     //    FindBook();
                     //    break;
@@ -161,6 +161,38 @@ namespace ISIP324_Kirshina
                         books.Add(newBook);
                         nextID++;
                     }
+                }
+                void RemoveBook()
+                {
+                    Console.WriteLine("Введите ID кинги, которую хотите удалить:");
+                    string input = Console.ReadLine();
+
+                    if (!int.TryParse(input, out int IDToRemove))
+                    {
+                        Console.WriteLine("Ошибка: ID должен быть числом!");
+                        Console.WriteLine("Нажмите Enter");
+                        return;
+                    }
+
+                    bool isFound = false;
+
+                    for (int i = 0;  i < books.Count; i++)
+                    {
+                        if (books[i].ID == IDToRemove)
+                        {
+                            Console.WriteLine($"Книга '{books[i].name}', ID - {IDToRemove} успешно удалена!");
+                            books.RemoveAt(i);
+
+                            isFound = true;
+                            break;
+                        }
+                    }
+                    if (!isFound)
+                    {
+                        Console.WriteLine($"Книга с ID {IDToRemove} не найдена.");
+                    }
+                    Console.WriteLine("Нажмите Enter");
+                    Console.ReadLine();
                 }
                 void ShowAll()
                 {
