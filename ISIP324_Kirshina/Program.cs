@@ -90,12 +90,12 @@ namespace ISIP324_Kirshina
                     case "4":
                         SortBooks();
                         break;
-                    //case "5":
-                    //    ShowMinMax();
-                    //    break;
-                    //case "6":
-                    //    GroupByAuthor();
-                    //    break;
+                    case "5":
+                        ShowMinMax();
+                        break;
+                    case "6":
+                        GroupByAuthor();
+                        break;
                     case "7":
                         ShowAll();
                         break;
@@ -358,6 +358,44 @@ namespace ISIP324_Kirshina
 
                     Console.WriteLine("Нажмите Enter, чтобы вернуться в меню");
                     Console.ReadLine();
+                }
+                void ShowMinMax()
+                {
+                    if (books.Count == 0)
+                    {
+                        Console.WriteLine("Список книг пуст. Нечего анализировать.");
+                        Console.WriteLine("Нажмите Enter");
+                        Console.ReadLine();
+                        return;
+                    }
+                    Books expensive = books[0];
+                    Books cheap = books[0];
+
+                    for (int i = 1; i < books.Count; i++)
+                    {
+                        if (books[i].price > expensive.price)
+                        {
+                            expensive = books[i];
+                        }
+
+                        if (books[i].price < cheap.price)
+                        {
+                            cheap = books[i];
+                        }
+                    }
+
+                    Console.WriteLine("Самая дорогая книга:");
+                    expensive.ShowInfo();
+
+                    Console.WriteLine("Самая дешевая книга:");
+                    cheap.ShowInfo();
+
+                    Console.WriteLine("Нажмите Enter, чтобы вернуться в меню");
+                    Console.ReadLine();
+                }
+                void GroupByAuthor()
+                {
+
                 }
                 void ShowAll()
                 {
