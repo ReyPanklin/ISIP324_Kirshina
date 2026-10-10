@@ -59,7 +59,7 @@ namespace ISIP324_Kirshina
             books.Add(new Books(nextID++, "Алиса в старне чудес", "Льюис Кэрролл", Genre.Fantasy, 1865, 500));
             books.Add(new Books(nextID++, "Оно", "Стивен Кинг", Genre.Horror, 1986, 750));
             books.Add(new Books(nextID++, "Дракула", "Брэм Стокер", Genre.Horror, 1897, 650));
-            books.Add(new Books(nextID++, "Война и мир", "Л. Толстой", Genre.Historic, 1869, 1200));
+            books.Add(new Books(nextID++, "Война и мир", "Лев Толстой", Genre.Historic, 1869, 1200));
 
             while (true)
             {
@@ -395,7 +395,34 @@ namespace ISIP324_Kirshina
                 }
                 void GroupByAuthor()
                 {
+                    if (books.Count == 0)
+                    {
+                        Console.WriteLine("Список книг пуст.");
+                        Console.WriteLine("Нажмите Enter");
+                        Console.ReadLine();
+                        return;
+                    }
+                    Dictionary<string, int> authorCounts = new Dictionary<string, int>();
+                    for (int i = 0; i < books.Count; i++)
+                    {
+                        if (authorCounts.ContainsKey(books[i].author))
+                        {
+                            authorCounts[books[i].author]++;
+                        }
+                        else
+                        {
+                            authorCounts[books[i].author] = 1;
+                        }
+                    }
 
+                    Console.WriteLine("Кол-во книг по авторам:");
+                    foreach (var pair in authorCounts)
+                    {
+                        Console.WriteLine($"{pair.Key}: {pair.Value} книг.");
+                    }
+
+                    Console.WriteLine("Нажмите Enter, чтобы вернуться в меню");
+                    Console.ReadLine();
                 }
                 void ShowAll()
                 {
