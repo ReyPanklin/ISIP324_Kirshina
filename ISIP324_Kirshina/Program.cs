@@ -63,7 +63,6 @@ namespace ISIP324_Kirshina
 
             while (true)
             {
-                Console.Clear();
                 Console.WriteLine("МЕНЮ");
                 Console.WriteLine("1. Добавить книгу");
                 Console.WriteLine("2. Удалить книгу по ID");
@@ -102,8 +101,7 @@ namespace ISIP324_Kirshina
                     case "0":
                         return;
                     default:
-                        Console.WriteLine("Неверный ввод. Нажмите Enter.");
-                        Console.ReadLine();
+                        Console.WriteLine("Неверный ввод");
                         break;
                 }
                 void AddBook()
@@ -116,7 +114,6 @@ namespace ISIP324_Kirshina
                     if (parts.Length != 5)
                     {
                         Console.WriteLine("Неправильный формат ввода! Напишите информацию по шаблону!");
-                        Console.ReadLine();
                         return;
                     }
                     else
@@ -135,42 +132,37 @@ namespace ISIP324_Kirshina
                             return;
                         }
 
-                        int genrenum = Convert.ToInt32(parts[2].Trim());
-                        if (genrenum < 1 || genrenum > 6)
+                        if (!int.TryParse(parts[2].Trim(), out int genrenum) || genrenum < 1 || genrenum > 6)
                         {
                             Console.WriteLine("Категория должна быть в диапазоне от 1 до 6!");
                             return;
                         }
                         Genre genre = (Genre)genrenum;
 
-                        uint year = Convert.ToUInt32(parts[3].Trim());
-                        if (year <= 0 || year > 2026)
+                        if (!uint.TryParse(parts[3].Trim(), out uint year) || year == 0 || year > 2026)
                         {
                             Console.WriteLine("Год должен быть в диапазоне от 1 до 2026.");
-                            Console.ReadLine();
                             return;
                         }
 
-                        uint cost = Convert.ToUInt32(parts[4].Trim());
-                        if (cost <= 0)
+                        if (!uint.TryParse(parts[4].Trim(), out uint price) || price == 0)
                         {
                             Console.WriteLine("Цена не может быть отрицательной и не может равняться нулю!");
                             return;
                         }
-                        Books newBook = new Books(nextID, name, author, genre, year, cost);
+                        Books newBook = new Books(nextID, name, author, genre, year, price);
                         books.Add(newBook);
                         nextID++;
                     }
                 }
                 void RemoveBook()
                 {
-                    Console.WriteLine("Введите ID кинги, которую хотите удалить:");
+                    Console.WriteLine("Введите ID книги, которую хотите удалить:");
                     string input = Console.ReadLine();
 
                     if (!int.TryParse(input, out int IDToRemove))
                     {
                         Console.WriteLine("Ошибка: ID должен быть числом!");
-                        Console.WriteLine("Нажмите Enter");
                         return;
                     }
 
@@ -191,12 +183,9 @@ namespace ISIP324_Kirshina
                     {
                         Console.WriteLine($"Книга с ID {IDToRemove} не найдена.");
                     }
-                    Console.WriteLine("Нажмите Enter, чтобы вернуться в меню.");
-                    Console.ReadLine();
                 }
                 void FindBook()
                 {
-                    Console.Clear();
                     Console.WriteLine("Поиск книги:");
                     Console.WriteLine("1. Поиск по названию");
                     Console.WriteLine("2. Поиск по автору");
@@ -204,62 +193,57 @@ namespace ISIP324_Kirshina
                     Console.WriteLine("0. Назад в меню");
                     string choice1 = Console.ReadLine();
 
-                    int foundCount = 0;
-
                     switch (choice1)
                     {
                         case "1":
-                            Console.Write("Введите часть или полное название книги:");
+                            Console.Write("Введите часть или полное название книги: ");
                             string searchName = Console.ReadLine().Trim().ToLower();
 
-                            Console.WriteLine("Результаты поиска:");
-                            for (int i = 0; i < books.Count; i++)
-                            {
-                                if (books[i].name.ToLower().Contains(searchName))
-                                {
-                                    books[i].ShowInfo();
-                                    foundCount++;
-                                }
-                            }
+                            var foundByName = books.Where(b => b.name.ToLower().Contains(searchName)).ToList();
+
+                            Console.WriteLine($"Результаты поиска (найдено: {foundByName.Count})");
+                            if (foundByName.Count == 0)
+                                Console.WriteLine("Книги не найдены.");
+                            else
+                                foreach (var book in foundByName)
+                                    book.ShowInfo();
                             break;
+
                         case "2":
-                            Console.Write("Введите часть или полное имя автора:");
+                            Console.Write("Введите часть или полное имя автора: ");
                             string searchAuthor = Console.ReadLine().Trim().ToLower();
 
-                            Console.WriteLine("Результаты поиска:");
-                            for (int i = 0; i < books.Count; i++)
-                            {
-                                if (books[i].author.ToLower().Contains(searchAuthor))
-                                {
-                                    books[i].ShowInfo();
-                                    foundCount++;
-                                }
-                            }
+                            var foundByAuthor = books.Where(b => b.author.ToLower().Contains(searchAuthor)).ToList();
+
+                            Console.WriteLine($"Результаты поиска (найдено: {foundByAuthor.Count})");
+                            if (foundByAuthor.Count == 0)
+                                Console.WriteLine("Книги не найдены.");
+                            else
+                                foreach (var book in foundByAuthor)
+                                    book.ShowInfo();
                             break;
+
                         case "3":
                             Console.WriteLine("Категории: 1 - Fantasy, 2 - Detective, 3 - Horror, 4 - Slasher, 5 - Historic, 6 - Thriller.");
-                            Console.Write("Введите номер категории:");
+                            Console.Write("Введите номер категории: ");
                             string genreInput = Console.ReadLine();
 
                             if (!int.TryParse(genreInput, out int genreNum) || genreNum < 1 || genreNum > 6)
                             {
                                 Console.WriteLine("Ошибка: нужно ввести число от 1 до 6!");
-                                Console.WriteLine("Нажмите Enter");
-                                Console.ReadLine();
                                 return;
                             }
 
                             Genre searchGenre = (Genre)genreNum;
 
-                            Console.WriteLine("Резульатаы поиска:");
-                            for (int i = 0; i < books.Count; i++)
-                            {
-                                if (books[i].Genre == searchGenre)
-                                {
-                                    books[i].ShowInfo();
-                                    foundCount++;
-                                }
-                            }
+                            var foundByGenre = books.Where(b => b.Genre == searchGenre).ToList();
+
+                            Console.WriteLine($"Результаты поиска (найдено: {foundByGenre.Count})");
+                            if (foundByGenre.Count == 0)
+                                Console.WriteLine("Книги не найдены.");
+                            else
+                                foreach (var book in foundByGenre)
+                                    book.ShowInfo();
                             break;
 
                         case "0":
@@ -267,26 +251,11 @@ namespace ISIP324_Kirshina
 
                         default:
                             Console.WriteLine("Неверный ввод!");
-                            Console.WriteLine("Нажмите Enter");
-                            Console.ReadLine();
                             return;
                     }
-
-                    if (foundCount == 0)
-                    {
-                        Console.WriteLine("Книги по вашему запросу не найдены.");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Найдено книг: {foundCount}");
-                    }
-
-                    Console.WriteLine("Нажмите Enter, чтобы вернуться в меню");
-                    Console.ReadLine();
                 }
                 void SortBooks()
                 {
-                    Console.Clear();
                     Console.WriteLine("Сортировка книг:");
                     Console.WriteLine("1. Сортировать по названию");
                     Console.WriteLine("2. Сортировать по году");
@@ -296,7 +265,7 @@ namespace ISIP324_Kirshina
                     switch (choice2)
                     {
                         case "1":
-                            Console.Write("Выберите направление:");
+                            Console.WriteLine("Выберите направление:");
                             Console.WriteLine("1. По возрастанию (А -> Я)");
                             Console.WriteLine("2. По убыванию (Я -> А)");
                             string dir1 = Console.ReadLine();
@@ -314,12 +283,11 @@ namespace ISIP324_Kirshina
                             else
                             {
                                 Console.WriteLine("Неверный ввод!");
-                                Console.ReadLine();
                                 return;
                             }
                             break;
                         case "2":
-                            Console.Write("Выберите направление:");
+                            Console.WriteLine("Выберите направление:");
                             Console.WriteLine("1. По возрастанию (сначала старые)");
                             Console.WriteLine("2. По убыванию (сначала новые)");
                             string dir2 = Console.ReadLine();
@@ -337,7 +305,6 @@ namespace ISIP324_Kirshina
                             else
                             {
                                 Console.WriteLine("Неверный ввод!");
-                                Console.ReadLine();
                                 return;
                             }
                             break;
@@ -346,83 +313,55 @@ namespace ISIP324_Kirshina
 
                         default:
                             Console.WriteLine("Неверный ввод!");
-                            Console.WriteLine("Нажмите Enter");
-                            Console.ReadLine();
                             return;
                     }
-                    Console.WriteLine("Результат:");
+                    Console.WriteLine("Результат: ");
                     foreach (Books book in books)
                     {
                         book.ShowInfo();
                     }
-
-                    Console.WriteLine("Нажмите Enter, чтобы вернуться в меню");
-                    Console.ReadLine();
                 }
                 void ShowMinMax()
                 {
                     if (books.Count == 0)
                     {
-                        Console.WriteLine("Список книг пуст. Нечего анализировать.");
-                        Console.WriteLine("Нажмите Enter");
-                        Console.ReadLine();
+                        Console.WriteLine("Список книг пуст.");
                         return;
                     }
-                    Books expensive = books[0];
-                    Books cheap = books[0];
 
-                    for (int i = 1; i < books.Count; i++)
+                    uint maxPrice = books.Max(b => b.price);
+                    uint minPrice = books.Min(b => b.price);
+
+                    var expensive = books.Where(b => b.price == maxPrice);
+                    var cheap = books.Where(b => b.price == minPrice);
+
+                    Console.WriteLine("Самая дорогая книга: ");
+                    foreach (var book in expensive)
                     {
-                        if (books[i].price > expensive.price)
-                        {
-                            expensive = books[i];
-                        }
-
-                        if (books[i].price < cheap.price)
-                        {
-                            cheap = books[i];
-                        }
+                        book.ShowInfo();
                     }
 
-                    Console.WriteLine("Самая дорогая книга:");
-                    expensive.ShowInfo();
-
-                    Console.WriteLine("Самая дешевая книга:");
-                    cheap.ShowInfo();
-
-                    Console.WriteLine("Нажмите Enter, чтобы вернуться в меню");
-                    Console.ReadLine();
+                    Console.WriteLine("Самая дешевая книга: ");
+                    foreach (var book in cheap)
+                    {
+                        book.ShowInfo();
+                    }
                 }
                 void GroupByAuthor()
                 {
                     if (books.Count == 0)
                     {
                         Console.WriteLine("Список книг пуст.");
-                        Console.WriteLine("Нажмите Enter");
-                        Console.ReadLine();
                         return;
                     }
-                    Dictionary<string, int> authorCounts = new Dictionary<string, int>();
-                    for (int i = 0; i < books.Count; i++)
-                    {
-                        if (authorCounts.ContainsKey(books[i].author))
-                        {
-                            authorCounts[books[i].author]++;
-                        }
-                        else
-                        {
-                            authorCounts[books[i].author] = 1;
-                        }
-                    }
 
-                    Console.WriteLine("Кол-во книг по авторам:");
-                    foreach (var pair in authorCounts)
-                    {
-                        Console.WriteLine($"{pair.Key}: {pair.Value} книг.");
-                    }
+                    var grouped = books.GroupBy(b => b.author);
 
-                    Console.WriteLine("Нажмите Enter, чтобы вернуться в меню");
-                    Console.ReadLine();
+                    Console.WriteLine("Кол-во книг по авторам: ");
+                    foreach (var group in grouped)
+                    {
+                        Console.WriteLine($"{group.Key}: {group.Count()} книг.");
+                    }
                 }
                 void ShowAll()
                 {
@@ -432,14 +371,12 @@ namespace ISIP324_Kirshina
                     }
                     else
                     {
-                        Console.WriteLine("Список всех книг:");
+                        Console.WriteLine("Список всех книг: ");
                         foreach (Books book in books)
                         {
                             book.ShowInfo();
                         }
                     }
-                    Console.WriteLine("Нажмите Enter, чтобы вернуться в меню.");
-                    Console.ReadLine();
                 }
             }
         }
