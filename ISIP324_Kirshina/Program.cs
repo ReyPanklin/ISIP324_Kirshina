@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
@@ -222,38 +223,118 @@ namespace ISIP324_Kirshina
         }
         static void Main(string[] args)
         {
-            //void ShowMenu()
-            //{
-            //    while (true)
-            //    {
-            //        Console.WriteLine("Меню:");
-            //        Console.WriteLine("1. Управление студентами");
-            //        Console.WriteLine("2. Управление преподавателями");
-            //        Console.WriteLine("3. Управление курсами");
-            //        Console.WriteLine("4. Показать все списки");
-            //        Console.WriteLine("0. Выход");
-            //        Console.Write("Выберите вариант: ");
-            //        string choice = Console.ReadLine();
+            List<Student> students = new List<Student>();
+            List<Teacher> teachers = new List<Teacher>();
+            List<Course> courses = new List<Course>();
+            ShowMenu();
+            void ShowMenu()
+            {
+                while (true)
+                {
+                    Console.WriteLine("Меню:");
+                    Console.WriteLine("1. Управление студентами");
+                    Console.WriteLine("2. Управление преподавателями");
+                    Console.WriteLine("3. Управление курсами");
+                    Console.WriteLine("4. Показать все списки");
+                    Console.WriteLine("0. Выход");
+                    Console.Write("Выберите вариант: ");
+                    string choice = Console.ReadLine();
 
-            //        switch(choice)
-            //        {
-            //            case "1":
-            //                StudentMenu();
-            //                break;
+                    switch (choice)
+                    {
+                        case "1":
+                            StudentMenu();
+                            break;
                         //case "2":
+                        //    TeacherMenu();
+                        //    break;
+                        //case "3":
+                        //    CourseMenu();
+                        //    break;
+                        //case "4":
+                        //    ShowLists();
+                            //break;
+                        case "0":
+                            return;
+                        //default:
+                        //    Console.WriteLine("Неправильный выбор!");
+                    }
+                }
+                void StudentMenu()
+                {
+                    while (true)
+                    {
+                        Console.WriteLine("Система управления студентами:");
+                        Console.WriteLine("1. Добавить студента");
+                        Console.WriteLine("2. Показать всех студентов");
+                        Console.WriteLine("3. Записать студента на курс");
+                        Console.WriteLine("4. Показать все курсы указанного студента");
+                        Console.WriteLine("0. Выход");
+                        Console.Write("Выберите вариант: ");
+                        string choice = Console.ReadLine();
 
-            //        }
-            //}
-            //void StudentMenu()
-            //{
-            //    Console.WriteLine("Система управления студентами:");
-            //    Console.WriteLine("1. Добавить студента");
-            //    Console.WriteLine("2. Показать всех студентов");
-            //    Console.WriteLine("3. Записать студента на курс");
-            //    Console.WriteLine("4. Показать все курсы указанного студента");
-            //    Console.WriteLine("0. Выход");
-            //    Console.Write("Выберите вариант: ");
-            //}
+                        switch (choice)
+                        {
+                            case "1":
+                                AddStudent();
+                                break;
+                            //case "2":
+                            //    ShowStudents();
+                            //    break;
+                            //case "3":
+                            //    StCourseAttend();
+                            //    break;
+                            //case "4":
+                            //    ShowCoursesOfSt();
+                            case "0":
+                                return;
+                                //default:
+                                //    Console.WriteLine("Неправильный выбор!");
+                        }
+                        void AddStudent()
+                        {
+                            Console.WriteLine("Добавление студента:");
+                            Console.WriteLine("Введите данные о студенте в следующем формате: ФИО; возраст; email; номер телефона");
+                            Console.Write("Ваш ввод: ");
+
+                            string input = Console.ReadLine();
+
+                            string[] parts = input.Split(';');
+
+                            if (parts.Length != 4)
+                            {
+                                Console.WriteLine("Неправильный формат ввода. Следуйте шаблону!");
+                                return;
+                            }
+
+                            string fio = parts[0].Trim();
+                            string ageString = parts[1].Trim();
+                            string email = parts[2].Trim();
+                            string phone = parts[3].Trim();
+
+                            int age;
+                            try
+                            {
+                                age = Convert.ToInt32(ageString);
+                            } catch (Exception)
+                            {
+                                Console.WriteLine("Ошибка: Возраст должен быть числом!");
+                                return;
+                            }
+                            try
+                            {
+                                Student student = new Student(fio, age, email, phone, 0);
+                                students.Add(student);
+                                Console.WriteLine($"Студент {fio} был успешно создан!");
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine($"Ошибка валидации: {ex.Message}");
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
