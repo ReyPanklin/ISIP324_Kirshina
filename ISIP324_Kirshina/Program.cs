@@ -346,6 +346,36 @@ namespace ISIP324_Kirshina
                                 Console.WriteLine("____________________");
                             }
                         }
+                        void StCourseAttend()
+                        {
+                            Console.WriteLine("Запись студента на курс");
+                            if (students.Count == 0)
+                            {
+                                Console.WriteLine("Список студентов пуст");
+                                return;
+                            }
+                            if (courses.Count == 0)
+                            {
+                                Console.WriteLine("Список курсов пуст");
+                                return;
+                            }
+                            Console.WriteLine("Выберите студента:");
+                            for (int i = 0; i < students.Count; i++)
+                            {
+                                Console.WriteLine($"{i+1}. {students[i].Fio}");
+                            }
+                            int studentIndex = Convert.ToInt32(Console.ReadLine()) - 1;
+
+                            Console.WriteLine("Выберите курс:");
+                            for (int i = 0; i < courses.Count; i++)
+                            {
+                                Console.WriteLine($"{i+1}. {courses[i].Name}");
+                            }
+                            int courseIndex = Convert.ToInt32(Console.ReadLine()) - 1;
+
+                            students[studentIndex].EnrollInCourses(courses[courseIndex]);
+                            Console.WriteLine("Студент успешно записан на курс!");
+                        }
                     }
                 }
             }
