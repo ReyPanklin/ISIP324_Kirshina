@@ -278,9 +278,9 @@ namespace ISIP324_Kirshina
                             case "1":
                                 AddStudent();
                                 break;
-                            //case "2":
-                            //    ShowStudents();
-                            //    break;
+                            case "2":
+                                ShowStudents();
+                                break;
                             //case "3":
                             //    StCourseAttend();
                             //    break;
@@ -330,6 +330,20 @@ namespace ISIP324_Kirshina
                             catch (Exception ex)
                             {
                                 Console.WriteLine($"Ошибка валидации: {ex.Message}");
+                            }
+                        }
+                        void ShowStudents()
+                        {
+                            Console.WriteLine("Все студенты:");
+                            if (students.Count == 0)
+                            {
+                                Console.WriteLine("Список студентов пуст");
+                                return;
+                            }
+                            foreach(var student in students)
+                            {
+                                student.ShowInfo();
+                                Console.WriteLine("____________________");
                             }
                         }
                     }
