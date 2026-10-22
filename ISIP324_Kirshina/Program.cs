@@ -256,8 +256,9 @@ namespace ISIP324_Kirshina
                             //break;
                         case "0":
                             return;
-                        //default:
-                        //    Console.WriteLine("Неправильный выбор!");
+                        default:
+                            Console.WriteLine("Неправильный выбор!");
+                            return;
                     }
                 }
                 void StudentMenu()
@@ -281,15 +282,17 @@ namespace ISIP324_Kirshina
                             case "2":
                                 ShowStudents();
                                 break;
-                            //case "3":
-                            //    StCourseAttend();
-                            //    break;
-                            //case "4":
-                            //    ShowCoursesOfSt();
+                            case "3":
+                                StCourseAttend();
+                                break;
+                            case "4":
+                                ShowCoursesOfSt();
+                                break;
                             case "0":
                                 return;
-                                //default:
-                                //    Console.WriteLine("Неправильный выбор!");
+                            default:
+                                Console.WriteLine("Неправильный выбор!");
+                                return;
                         }
                         void AddStudent()
                         {
@@ -375,6 +378,23 @@ namespace ISIP324_Kirshina
 
                             students[studentIndex].EnrollInCourses(courses[courseIndex]);
                             Console.WriteLine("Студент успешно записан на курс!");
+                        }
+                        void ShowCoursesOfSt()
+                        {
+                            Console.WriteLine("Курсы студента");
+                            if (students.Count == 0)
+                            {
+                                Console.WriteLine("Список студентов пуст");
+                                return;
+                            }
+                            Console.WriteLine("Выберите студента:");
+                            for (int i = 0; i < students.Count; i++)
+                            {
+                                Console.WriteLine($"{i + 1}. {students[i].Fio}");
+                            }
+                            int index = Convert.ToInt32(Console.ReadLine()) - 1;
+
+                            students[index].ShowInfo();
                         }
                     }
                 }
