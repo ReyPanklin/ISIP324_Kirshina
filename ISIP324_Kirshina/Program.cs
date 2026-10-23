@@ -424,7 +424,7 @@ namespace ISIP324_Kirshina
                                 ShowTeachers();
                                 break;
                             //case "3":
-                            //    AssignTeacherCourse();
+                            //    AssignTeacherToCourse();
                             //    break;
                             case "0":
                                 return;
@@ -489,6 +489,40 @@ namespace ISIP324_Kirshina
                         teacher.ShowInfo();
                         Console.WriteLine("____________________");
                     }
+                }
+                void AssignTeacherToCourse()
+                {
+                    Console.WriteLine("Назначение преподавателя на курс");
+                    if (teachers.Count == 0)
+                    {
+                        Console.WriteLine("Список учителей пуст");
+                        return;
+                    }
+                    if (courses.Count == 0)
+                    {
+                        Console.WriteLine("Список курсов пуст");
+                        return;
+                    }
+                    Console.WriteLine("Выберите преподавателя:");
+                    for (int i = 0; i < teachers.Count; i++)
+                    {
+                        Console.WriteLine($"{i + 1}. {teachers[i].Fio}");
+                    }
+                    int teacherIndex = Convert.ToInt32(Console.ReadLine()) - 1;
+
+                    Console.WriteLine("Выберите курс:");
+                    for (int i = 0; i < courses.Count; i++)
+                    {
+                        Console.WriteLine($"{i + 1}. {courses[i].Name}");
+                    }
+                    int courseIndex = Convert.ToInt32(Console.ReadLine()) - 1;
+
+                    students[teacherIndex].EnrollInCourses(courses[courseIndex]);
+                    Console.WriteLine("Преподаватель успешно назначен на курс!");
+                }
+                void CourseMenu()
+                {
+
                 }
             }
         }
