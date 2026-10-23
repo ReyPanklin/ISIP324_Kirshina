@@ -261,6 +261,9 @@ namespace ISIP324_Kirshina
                         case "3":
                             CourseMenu();
                             break;
+                        case "4":
+                            ShowAllLists();
+                            break;
                         case "0":
                             return;
                         default:
@@ -676,6 +679,46 @@ namespace ISIP324_Kirshina
                     foreach (var student in enrolledStudents)
                     {
                         Console.WriteLine($"{student.Fio}");
+                    }
+                }
+            }
+            void ShowAllLists()
+            {
+                Console.WriteLine("ВСЕ СПИСКИ");
+
+                if (students.Count == 0)
+                {
+                    Console.WriteLine("Список студентов пуст");
+
+                }
+                else
+                {
+                    Console.WriteLine("Студенты:");
+                    foreach (var s in students)
+                    {
+                        Console.WriteLine(s.Fio);
+                    }
+                }
+                if (teachers.Count == 0)
+                {
+                    Console.WriteLine("Список преподавателей пуст");
+                }
+                else { 
+                    Console.WriteLine("Преподаватели:");
+                    foreach (var t in teachers)
+                    {
+                        Console.WriteLine(t.Fio);
+                    }
+                }
+                if (courses.Count == 0)
+                {
+                    Console.WriteLine("Список курсов пуст");
+                }
+                else {
+                    Console.WriteLine("Курсы:");
+                    foreach (var c in courses)
+                    {
+                        Console.WriteLine(c.Name);
                     }
                 }
             }
