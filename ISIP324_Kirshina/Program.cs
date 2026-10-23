@@ -695,9 +695,9 @@ namespace ISIP324_Kirshina
                 else
                 {
                     Console.WriteLine("Студенты:");
-                    foreach (var s in students)
+                    foreach (var student in students)
                     {
-                        Console.WriteLine(s.Fio);
+                        Console.WriteLine(student.Fio);
                     }
                 }
                 if (teachers.Count == 0)
@@ -706,9 +706,9 @@ namespace ISIP324_Kirshina
                 }
                 else { 
                     Console.WriteLine("Преподаватели:");
-                    foreach (var t in teachers)
+                    foreach (var teacher in teachers)
                     {
-                        Console.WriteLine(t.Fio);
+                        Console.WriteLine(teacher.Fio);
                     }
                 }
                 if (courses.Count == 0)
@@ -717,9 +717,9 @@ namespace ISIP324_Kirshina
                 }
                 else {
                     Console.WriteLine("Курсы:");
-                    foreach (var c in courses)
+                    foreach (var course in courses)
                     {
-                        Console.WriteLine(c.Name);
+                        Console.WriteLine(course.Name);
                     }
                 }
             }
