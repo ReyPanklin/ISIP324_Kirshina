@@ -268,7 +268,7 @@ namespace ISIP324_Kirshina
                             return;
                         default:
                             Console.WriteLine("Неправильный выбор!");
-                            return;
+                            break;
                     }
                 }
             }
@@ -303,7 +303,7 @@ namespace ISIP324_Kirshina
                             return;
                         default:
                             Console.WriteLine("Неправильный выбор!");
-                            return;
+                            break;
                     }
                 }
             }
@@ -437,7 +437,7 @@ namespace ISIP324_Kirshina
                             return;
                         default:
                             Console.WriteLine("Неправильный выбор!");
-                            return;
+                            break;
                     }
                 }
             }
@@ -476,7 +476,7 @@ namespace ISIP324_Kirshina
                 {
                     Teacher teacher = new Teacher(fio, age, email, phone, 0);
                     teachers.Add(teacher);
-                    Console.WriteLine($"Студент {fio} был успешно создан!");
+                    Console.WriteLine($"Преподаватель {fio} был успешно создан!");
                 }
                 catch (Exception ex)
                 {
@@ -524,7 +524,8 @@ namespace ISIP324_Kirshina
                 }
                 int courseIndex = Convert.ToInt32(Console.ReadLine()) - 1;
 
-                students[teacherIndex].EnrollInCourses(courses[courseIndex]);
+                teachers[teacherIndex].AssignToCourse(courses[courseIndex]);
+                courses[courseIndex].Teacher = teachers[teacherIndex];
                 Console.WriteLine("Преподаватель успешно назначен на курс!");
             }
             void CourseMenu()
@@ -553,12 +554,12 @@ namespace ISIP324_Kirshina
                             break;
                         case "4":
                             ShowCourseStudents();
-                            return;
+                            break;
                         case "0":
                             return;
                         default:
                             Console.WriteLine("Неправильный выбор!");
-                            return;
+                            break;
                     }
                 }
             }
@@ -593,7 +594,7 @@ namespace ISIP324_Kirshina
                     Console.WriteLine($"{i+1}. {teachers[i].Fio}");
                 }
 
-                int teacherIndex = Convert.ToInt32(Console.ReadLine());
+                int teacherIndex = Convert.ToInt32(Console.ReadLine()) - 1;
                 Teacher selectedTeacher = teachers[teacherIndex];
                 try
                 {
