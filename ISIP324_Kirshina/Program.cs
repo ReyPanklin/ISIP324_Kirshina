@@ -261,9 +261,6 @@ namespace ISIP324_Kirshina
                         case "3":
                             CourseMenu();
                             break;
-                        //case "4":
-                        //    ShowLists();
-                        //break;
                         case "0":
                             return;
                         default:
@@ -551,9 +548,9 @@ namespace ISIP324_Kirshina
                         case "3":
                             ShowCourseDetails();
                             break;
-                        //case "4":
-                        //    ShowCourseStudents();
-                        //    return;
+                        case "4":
+                            ShowCourseStudents();
+                            return;
                         case "0":
                             return;
                         default:
@@ -645,6 +642,42 @@ namespace ISIP324_Kirshina
                 Console.WriteLine($"Описание: {course.Description}");
                 Console.WriteLine($"Преподаватель: {course.Teacher.Fio}");
                 Console.WriteLine($"Студентов записано: {course.Students.Count}");
+            }
+            void ShowCourseStudents()
+            {
+                Console.WriteLine("Студенты на курсе");
+                if (courses.Count == 0)
+                {
+                    Console.WriteLine("Список курсов пуст");
+                    return;
+                }
+                Console.WriteLine("Выберите курс:");
+                for (int i = 0; i < courses.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {courses[i].Name}");
+                }
+
+                int courseIndex = Convert.ToInt32(Console.ReadLine()) - 1;
+                Course selectedCourse = courses[courseIndex];
+
+                Console.WriteLine($"Курс: {selectedCourse.Name}");
+                Console.WriteLine($"Преподаватель: {selectedCourse.Teacher.Fio}");
+                Console.WriteLine($"Описание: {selectedCourse.Description}");
+                Console.WriteLine("Список студентов:");
+
+                var enrolledStudents = students.Where(s => s.Courses.Contains(selectedCourse)).ToList();
+
+                if (enrolledStudents.Count == 0)
+                {
+                    Console.WriteLine("На курсе пока нет студентов.");
+                }
+                else
+                {
+                    foreach (var student in enrolledStudents)
+                    {
+                        Console.WriteLine($"{student.Fio}");
+                    }
+                }
             }
         }
     }
