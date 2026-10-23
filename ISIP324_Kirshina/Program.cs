@@ -488,7 +488,7 @@ namespace ISIP324_Kirshina
                 Console.WriteLine("Все преподавателм:");
                 if (teachers.Count == 0)
                 {
-                    Console.WriteLine("Список студентов пуст");
+                    Console.WriteLine("Список преподавателей пуст");
                     return;
                 }
                 foreach (var teacher in teachers)
@@ -545,9 +545,9 @@ namespace ISIP324_Kirshina
                         case "1":
                             AddCourse();
                             break;
-                        //case "2":
-                        //    ShowCourses();
-                        //    break;
+                        case "2":
+                            ShowCourses();
+                            break;
                         //case "3":
                         //    ShowCourseDetails();
                         //    break;
@@ -605,6 +605,23 @@ namespace ISIP324_Kirshina
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Ошибка валидации: {ex.Message}");
+                }
+            }
+            void ShowCourses()
+            {
+                Console.WriteLine("Все курсы:");
+                if (courses.Count == 0)
+                {
+                    Console.WriteLine("Список курсов пуст");
+                    return;
+                }
+                foreach (var course in courses)
+                {
+                    Console.WriteLine($"Название: {course.Name}");
+                    Console.WriteLine($"Описание: {course.Description}");
+                    Console.WriteLine($"Преподаватель: {course.Teacher.Fio}");
+                    Console.WriteLine($"Студентов: {course.Students.Count}");
+                    Console.WriteLine("____________________________");
                 }
             }
         }
