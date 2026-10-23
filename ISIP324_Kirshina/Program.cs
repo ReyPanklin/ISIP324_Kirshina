@@ -548,9 +548,9 @@ namespace ISIP324_Kirshina
                         case "2":
                             ShowCourses();
                             break;
-                        //case "3":
-                        //    ShowCourseDetails();
-                        //    break;
+                        case "3":
+                            ShowCourseDetails();
+                            break;
                         //case "4":
                         //    ShowCourseStudents();
                         //    return;
@@ -623,6 +623,28 @@ namespace ISIP324_Kirshina
                     Console.WriteLine($"Студентов: {course.Students.Count}");
                     Console.WriteLine("____________________________");
                 }
+            }
+            void ShowCourseDetails()
+            {
+                Console.WriteLine("Детали курса");
+                if (courses.Count == 0)
+                {
+                    Console.WriteLine("Список курсов пуст");
+                    return;
+                }
+
+                Console.WriteLine("Выберите курс:");
+                for (int i = 0; i < courses.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {courses[i].Name}");
+                }
+                int index = Convert.ToInt32(Console.ReadLine()) - 1;
+
+                var course = courses[index];
+                Console.WriteLine($"Название: {course.Name}");
+                Console.WriteLine($"Описание: {course.Description}");
+                Console.WriteLine($"Преподаватель: {course.Teacher.Fio}");
+                Console.WriteLine($"Студентов записано: {course.Students.Count}");
             }
         }
     }
