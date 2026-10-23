@@ -45,7 +45,7 @@ namespace ISIP324_Kirshina
                 get => age;
                 set
                 {
-                    if (value > 0 && value < 100)
+                    if (value > 14 && value < 100)
                     {
                         age = value;
                     }
