@@ -183,6 +183,12 @@ namespace ISIP324_Kirshina
             private string description;
             private Teacher teacher;
             private List<Student> students = new List<Student>();
+            public Course(string name, string description, Teacher teacher)
+            {
+                Name = name;
+                Description = description;
+                Teacher = teacher;
+            }
             public string Name
             {
                 get => name;
@@ -523,7 +529,83 @@ namespace ISIP324_Kirshina
             }
             void CourseMenu()
             {
+                while (true)
+                {
+                    Console.WriteLine("Система управления курсами:");
+                    Console.WriteLine("1. Добавить курс");
+                    Console.WriteLine("2. Показать все курсы");
+                    Console.WriteLine("3. Показать детали курса");
+                    Console.WriteLine("4. Вывести студентов курса");
+                    Console.WriteLine("0. Выход");
+                    Console.Write("Выберите вариант: ");
+                    string choice = Console.ReadLine();
 
+                    switch (choice)
+                    {
+                        case "1":
+                            AddCourse();
+                            break;
+                        //case "2":
+                        //    ShowCourses();
+                        //    break;
+                        //case "3":
+                        //    ShowCourseDetails();
+                        //    break;
+                        //case "4":
+                        //    ShowCourseStudents();
+                        //    return;
+                        case "0":
+                            return;
+                        default:
+                            Console.WriteLine("Неправильный выбор!");
+                            return;
+                    }
+                }
+            }
+            void AddCourse()
+            {
+                Console.WriteLine("Добавление курса:");
+                Console.WriteLine("Введите данные курсе в следующем формате: название; описание");
+                Console.Write("Ваш ввод: ");
+
+                string input = Console.ReadLine();
+
+                string[] parts = input.Split(';');
+
+                if (parts.Length != 2)
+                {
+                    Console.WriteLine("Неправильный формат ввода. Следуйте шаблону!");
+                    return;
+                }
+
+                string name = parts[0].Trim();
+                string description = parts[1].Trim();
+
+                if (teachers.Count == 0)
+                {
+                    Console.WriteLine("Список преподавателей пуст");
+                    return;
+                }
+
+                Console.WriteLine("Выберите преподавателя для курса:");
+                for (int i = 0; i < teachers.Count; i++)
+                {
+                    Console.WriteLine($"{i+1}. {teachers[i].Fio}");
+                }
+
+                int teacherIndex = Convert.ToInt32(Console.ReadLine());
+                Teacher selectedTeacher = teachers[teacherIndex];
+                try
+                {
+                    Course course = new Course(name, description, selectedTeacher);
+                    courses.Add(course);
+                    selectedTeacher.AssignToCourse(course);
+                    Console.WriteLine($"Курс {name} был успешно создан!");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Ошибка валидации: {ex.Message}");
+                }
             }
         }
     }
