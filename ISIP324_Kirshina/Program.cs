@@ -35,13 +35,30 @@ namespace ISIP324_Kirshina
             }
             public abstract void ShowStats();
         }
-        //public class Weapon : Item
+        public class Weapon : Item
+        {
+            public int Damage { get; }
+            public Weapon(string name, int damage)
+                : base(name)
+            {
+                Damage = damage;
+            }
+            public override void ShowStats()
+            {
+                Console.WriteLine($"Оружие: {Name}, урон: {Damage}");
+            }
+        }
+        //public class Armor : Item
         //{
-        //    public int Damage { get; }
-        //    public Weapon(string name, int damage)
-        //        :base (name)
+        //    public int Defense { get; }
+        //    public Armor(string name, int defense)
+        //        : base(name)
         //    {
-        //        Damage = damage;
+        //        Defense = defense;
+        //    }
+        //    public override void ShowStats()
+        //    {
+        //        Console.WriteLine($"Броня: {Name}, защита: +{Defense}");
         //    }
         //}
         static void Main(string[] args)
