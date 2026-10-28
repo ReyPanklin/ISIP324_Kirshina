@@ -48,19 +48,19 @@ namespace ISIP324_Kirshina
                 Console.WriteLine($"Оружие: {Name}, урон: {Damage}");
             }
         }
-        //public class Armor : Item
-        //{
-        //    public int Defense { get; }
-        //    public Armor(string name, int defense)
-        //        : base(name)
-        //    {
-        //        Defense = defense;
-        //    }
-        //    public override void ShowStats()
-        //    {
-        //        Console.WriteLine($"Броня: {Name}, защита: +{Defense}");
-        //    }
-        //}
+        public class Armor : Item
+        {
+            public int Defense { get; }
+            public Armor(string name, int defense)
+                : base(name)
+            {
+                Defense = defense;
+            }
+            public override void ShowStats()
+            {
+                Console.WriteLine($"Броня: {Name}, защита: +{Defense}");
+            }
+        }
         static void Main(string[] args)
         {
         }
