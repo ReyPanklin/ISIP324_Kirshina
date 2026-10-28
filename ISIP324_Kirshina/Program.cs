@@ -8,6 +8,24 @@ namespace ISIP324_Kirshina
 {
     internal class Program
     {
+        public abstract class Entity
+        {
+            public string Name { get; protected set; }
+            public int Health { get; set; }
+            public int MaxHealth { get; private set; }
+            public int Attack { get; protected set; }
+            public int Defense { get; protected set; }
+            protected Random random;
+            public Entity(string name, int health, int maxHealth, int attack, int defense)
+            {
+                Name = name;
+                Health = health;
+                MaxHealth = maxHealth;
+                Attack = attack;
+                Defense = defense;
+                random = new Random();
+            }
+        }
         static void Main(string[] args)
         {
         }

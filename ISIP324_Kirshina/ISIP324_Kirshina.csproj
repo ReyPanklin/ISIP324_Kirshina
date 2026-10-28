@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8D94EBFF-1F29-479A-8A79-AD7F09CD7279}</ProjectGuid>
+    <ProjectGuid>{FB703726-7A03-086D-6D5F-64CDCA07931B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>ISIP324_Kirshina</RootNamespace>
     <AssemblyName>ISIP324_Kirshina</AssemblyName>
