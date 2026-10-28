@@ -61,6 +61,18 @@ namespace ISIP324_Kirshina
                 Console.WriteLine($"Броня: {Name}, защита: +{Defense}");
             }
         }
+        public class HealingPotion : Item
+        {
+            public HealingPotion()
+                : base("Лечебное зелье")
+            {
+
+            }
+            public override void ShowStats()
+            {
+                Console.WriteLine("Лечебное зелье. Полностью восстанавливает здоровье");
+            }
+        }
         static void Main(string[] args)
         {
         }
