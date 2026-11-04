@@ -217,8 +217,9 @@ namespace ISIP324_Kirshina
             protected Boss(string name, int health, int maxHealth, int attack, int defense)
                 : base(name, health, maxHealth, attack, defense) { }
         }
-        public class VVG : Goblin
+        public class VVG : Boss
         {
+            private int critChance = 30;
             public VVG()
                 : base("ВВГ", 30, 30, 8, 3)
             {
@@ -226,8 +227,23 @@ namespace ISIP324_Kirshina
                 this.Attack = Convert.ToInt32(this.Attack * 1.5);
                 this.Defense = Convert.ToInt32(this.Defense * 1.2);
             }
+            public override int GetDamage()
+            {
+                int damage = Attack;
+                if (random.Next(100) < critChance)
+                {
+                    damage *= 2;
+                    Console.WriteLine("Критический удар!");
+                }
+                return damage;
+            }
+
+            public override string GetSpecialAbility()
+            {
+                return $"Шанс крита: {critChance}%";
+            }
         }
-        public class Kovalsky : Skeleton
+        public class Kovalsky : Boss
         {
             public Kovalsky()
                 : base("Ковальский", 25, 25, 10, 4)
@@ -236,9 +252,18 @@ namespace ISIP324_Kirshina
                 this.Attack = Convert.ToInt32(this.Attack * 1.3);
                 this.Defense = Convert.ToInt32(this.Defense * 1.4);
             }
+            public override int GetDamage()
+            {
+                return Attack;
+            }
+            public override string GetSpecialAbility()
+            {
+                return "Игнорирует защиту игрока";
+            }
         }
-        public class ArchMagicianCpp : Magician
+        public class ArchMagicianCpp : Boss
         {
+            private int freezeChance = 35;
             public ArchMagicianCpp()
                 : base("Архимаг C++", 40, 40, 12, 2)
             {
@@ -246,8 +271,22 @@ namespace ISIP324_Kirshina
                 this.Attack = Convert.ToInt32(this.Attack * 1.6);
                 this.Defense = Convert.ToInt32(this.Defense * 1.1);
             }
+            public override int GetDamage()
+            {
+                int damage = Attack;
+                if (random.Next(100) < freezeChance)
+                {
+                    Console.WriteLine("Архимаг заморозил вас! Вы пропускаете следующий ход!");
+                    return 0;
+                }
+                return damage;
+            }
+            public override string GetSpecialAbility()
+            {
+                return $"Шанс заморозки: {freezeChance}%";
+            }
         }
-        public class PestovCmm : Skeleton
+        public class PestovCmm : Boss
         {
             public PestovCmm()
                 : base("Пестов C--", 25, 25, 10, 4)
@@ -255,6 +294,15 @@ namespace ISIP324_Kirshina
                 this.Health = Convert.ToInt32(this.Health * 1.3);
                 this.Attack = Convert.ToInt32(this.Attack * 1.8);
                 this.Defense = Convert.ToInt32(this.Defense * 0.6);
+            }
+            public override int GetDamage()
+            {
+                return Attack;
+            }
+
+            public override string GetSpecialAbility()
+            {
+                return "Игнорирует защиту игрока";
             }
         }
         static void Main(string[] args)
