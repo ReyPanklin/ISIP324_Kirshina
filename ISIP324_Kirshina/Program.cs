@@ -401,6 +401,61 @@ namespace ISIP324_Kirshina
                     return new VVG();
             }
         }
+        static void Combat(Player player, Enemy enemy, Random random)
+        {
+            bool enemyAlive = true;
+            bool playerDefending = false;
+
+            while (enemyAlive == true && player.Health > 0)
+            {
+                Console.WriteLine("Ваш ход:");
+
+                bool isValidChoice = false;
+
+                do
+                {
+                    Console.WriteLine("1. Атака");
+                    Console.WriteLine("2. Защита");
+                    Console.Write("Выберите действие: ");
+                    string choice = Console.ReadLine();
+
+                    switch (choice)
+                    {
+                        case "1":
+                            int rawPlayerDamage = player.GetDamage();
+                            int actualPlayerDamage = rawPlayerDamage - enemy.Defense;
+
+                            enemy.Health -= actualPlayerDamage;
+                            Console.WriteLine($"Вы нанесли {actualPlayerDamage} урона врагу.");
+                            isValidChoice = true;
+                            break;
+                        case "2":
+                            playerDefending = true;
+                            Console.WriteLine("Вы блокируете атаку");
+                            isValidChoice = true;
+                            break;
+                        default:
+                            Console.WriteLine("Неверная команда! Ведите цифру 1 или 2.");
+                            break;
+                    }
+
+                } while (isValidChoice == false);
+
+                if (enemy.Health <= 0)
+                {
+                    Console.WriteLine($"{enemy.Name} повержен!");
+                    enemyAlive = false;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine($"HP врага: {enemy.Health}");
+                }
+                Console.WriteLine("Ход врага:");
+                EnemyAttack(player, enemy, random, playerDefending);
+                playerDefending = false;
+            }
+        }
 
     }
 }
