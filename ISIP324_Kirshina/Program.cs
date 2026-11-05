@@ -315,6 +315,51 @@ namespace ISIP324_Kirshina
             Console.WriteLine($"Добро пожаловать, {player.Name}!");
             Console.WriteLine($"Ваши характеристики: HP={player.Health}, Атака={player.Attack}, Защита={player.Defense}");
 
+            while (gameRunning == true && player.Health > 0)
+            {
+                turnCount++;
+                Console.WriteLine($"ХОД {turnCount}");
+                Console.WriteLine($"Ваше здоровье: {player.Health}/{player.MaxHealth}");
+
+                if (turnCount % 10 == 0)
+                {
+                    Console.WriteLine("ВСТРЕЧАЙТЕ БОССА");
+                    Boss boss = GetRandomBoss(random);
+                    Console.WriteLine($"На вас напал: {boss.Name}!");
+                    Console.WriteLine($"Характеристики босса: HP={boss.Health}, Атака={boss.Attack}, Защита={boss.Defense}");
+                    Console.WriteLine($"Способность: {boss.GetSpecialAbility()}");
+
+                    Combat(player, boss, random);
+                }
+                else
+                {
+                    if (random.Next(2) == 0)
+                    {
+                        Console.WriteLine("Вы нашли сундук!");
+                        OpenChest(player, random);
+                    }
+                    else
+                    {
+                        Enemy enemy = GetRandomEnemy(random);
+                        Console.WriteLine($"На вас напал: {enemy.Name}!");
+                        Console.WriteLine($"Характеристики врага: HP={enemy.Health}, Атака={enemy.Attack}, Защита={enemy.Defense}");
+                        Console.WriteLine($"Способность: {enemy.GetSpecialAbility()}");
+
+                        Combat(player, enemy, random);
+                    }
+                }
+                if (player.Health <= 0)
+                {
+                    Console.WriteLine("ВЫ ПОМЕРЛИ!");
+                    Console.WriteLine($"Вы продержались {turnCount} ходов.");
+                    gameRunning = false;
+                }
+                else
+                {
+                    Console.WriteLine("Нажмите любую клавишу для продолжения");
+                    Console.ReadKey();
+                }
+            }
 
         }
     }
