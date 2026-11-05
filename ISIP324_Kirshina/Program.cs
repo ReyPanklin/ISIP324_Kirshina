@@ -507,6 +507,125 @@ namespace ISIP324_Kirshina
                 Console.WriteLine($"Ваше здоровье: {player.Health}/{player.MaxHealth}");
             }
         }
+        static void OpenChest(Player player, Random random)
+        {
+            int itemType = random.Next(3);
 
+            switch (itemType)
+            {
+                case 0:
+                    Console.WriteLine("Вы нашли лечебное зелье!");
+                    player.Heal();
+                    break;
+
+                case 1:
+                    string[] weaponNames = { "Ржавый меч", "Стальной топор", "Кинжал убийцы", "Боевой молот" };
+                    string weaponName = weaponNames[random.Next(weaponNames.Length)];
+                    int weaponDamage;
+
+                    switch (weaponName)
+                    {
+                        case "Ржавый меч":
+                            weaponDamage = random.Next(2, 6);
+                            break;
+                        case "Стальной топор":
+                            weaponDamage = random.Next(5, 9);
+                            break;
+                        case "Кинжал убийцы":
+                            weaponDamage = random.Next(4, 8);
+                            break;
+                        case "Боевой молот":
+                            weaponDamage = random.Next(7, 11);
+                            break;
+                        default:
+                            weaponDamage = random.Next(3, 10);
+                            break;
+                    }
+
+                    Weapon newWeapon = new Weapon(weaponName, weaponDamage);
+
+                    Console.WriteLine($"Вы нашли оружие:");
+                    newWeapon.ShowStats();
+                    Console.WriteLine($"Ваше текущее оружие:");
+                    player.EqWeapon.ShowStats();
+
+                    bool isWeaponChoiceValid = false;
+                    do
+                    {
+                        Console.WriteLine("Взять новое оружие? (y - да, n - нет): ");
+                        string choice = Console.ReadLine();
+                        if (choice != null && choice.ToLower() == "y")
+                        {
+                            player.EqWeapon = newWeapon;
+                            Console.WriteLine("Оружие экипировано!");
+                            isWeaponChoiceValid = true;
+                        }
+                        else if (choice != null && choice.ToLower() == "n")
+                        {
+                            Console.WriteLine("Вы не взяли оружие.");
+                            isWeaponChoiceValid = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Неверная команда! Введите 'y' или 'n'.");
+                        }
+                    } while (!isWeaponChoiceValid);
+                    break;
+
+                case 2:
+                    string[] armorNames = { "Кожаная куртка", "Кольчуга", "Стальная броня", "Щит воина" };
+                    string armorName = armorNames[random.Next(armorNames.Length)];
+                    int armorDefense;
+                    switch (armorName)
+                    {
+                        case "Кожаная куртка":
+                            armorDefense = random.Next(1, 4);
+                            break;
+                        case "Кольчуга":
+                            armorDefense = random.Next(3, 7);
+                            break;
+                        case "Стальная броня":
+                            armorDefense = random.Next(5, 10);
+                            break;
+                        case "Щит воина":
+                            armorDefense = random.Next(4, 8);
+                            break;
+                        default:
+                            armorDefense = random.Next(2, 6);
+                            break;
+                    }
+                    Armor newArmor = new Armor(armorName, armorDefense);
+
+                    Console.WriteLine($"Вы нашли броню:");
+                    newArmor.ShowStats();
+                    Console.WriteLine($"Ваша текущая броня:");
+                    player.EqArmor.ShowStats();
+
+                    bool isArmorChoiceValid = false;
+                    do
+                    {
+                        Console.WriteLine("Надеть новую броню? (y - да, n - нет): ");
+                        string choice = Console.ReadLine();
+
+                        if (choice != null && choice.ToLower() == "y")
+                        {
+                            player.EqArmor = newArmor;
+                            Console.WriteLine("Броня экипирована!");
+                            isArmorChoiceValid = true;
+                        }
+                        else if (choice != null && choice.ToLower() == "n")
+                        {
+                            Console.WriteLine("Вы не взяли броню.");
+                            isArmorChoiceValid = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Неверная команда! Введите 'y' или 'n'.");
+                        }
+                    } while (!isArmorChoiceValid);
+                    break;
+            }
+
+        }
     }
 }
