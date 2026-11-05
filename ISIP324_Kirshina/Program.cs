@@ -360,7 +360,29 @@ namespace ISIP324_Kirshina
                     Console.ReadKey();
                 }
             }
-
+            if (!gameRunning)
+            {
+                Console.WriteLine("ИГРА ОКОНЧЕНА");
+                Console.WriteLine($"Всего ходов: {turnCount}");
+            }
         }
+
+        static Enemy GetRandomEnemy(Random random)
+        {
+            int enemyType = random.Next(3);
+
+            switch (enemyType)
+            {
+                case 0:
+                    return new Goblin();
+                case 1:
+                    return new Skeleton();
+                case 2:
+                    return new Magician();
+                default:
+                    return new Goblin();
+            }
+        }
+
     }
 }
