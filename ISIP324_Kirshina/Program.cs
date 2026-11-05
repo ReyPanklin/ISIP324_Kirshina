@@ -491,13 +491,13 @@ namespace ISIP324_Kirshina
                     {
                         int blockPercent = random.Next(70, 101);
                         int blockedDamage = playerDefense * blockPercent / 100;
-                        damage = damage - blockedDamage;
+                        damage = Math.Max(0,damage - blockedDamage);
                         Console.WriteLine($"Блок снизил урон на {blockedDamage} ({blockPercent}% от защиты)");
                     }
                 }
                 else
                 {
-                    damage = damage - playerDefense;
+                    damage = Math.Max(0,damage - playerDefense);
                 }
             }
             if (!skipDamage)
