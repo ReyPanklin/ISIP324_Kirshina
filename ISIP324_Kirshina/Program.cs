@@ -150,7 +150,7 @@ namespace ISIP324_Kirshina
                 if (random.Next(100) < CritChance)
                 {
                     damage *= 2;
-                    Console.WriteLine("Критический удар!");
+                    Console.WriteLine("Критический урон!");
                 }
                 return damage;
             }
@@ -307,6 +307,15 @@ namespace ISIP324_Kirshina
         }
         static void Main(string[] args)
         {
+            Player player = new Player();
+            Random random = new Random();
+            int turnCount = 0;
+            bool gameRunning = true;
+
+            Console.WriteLine($"Добро пожаловать, {player.Name}!");
+            Console.WriteLine($"Ваши характеристики: HP={player.Health}, Атака={player.Attack}, Защита={player.Defense}");
+
+
         }
     }
 }
