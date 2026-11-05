@@ -383,6 +383,24 @@ namespace ISIP324_Kirshina
                     return new Goblin();
             }
         }
+        static Boss GetRandomBoss(Random random)
+        {
+            int bossType = random.Next(4);
+
+            switch (bossType)
+            {
+                case 0:
+                    return new VVG();
+                case 1:
+                    return new Kovalsky();
+                case 2:
+                    return new ArchMagicianCpp();
+                case 3:
+                    return new PestovCmm();
+                default:
+                    return new VVG();
+            }
+        }
 
     }
 }
