@@ -456,6 +456,57 @@ namespace ISIP324_Kirshina
                 playerDefending = false;
             }
         }
+        static void EnemyAttack(Player player, Enemy enemy, Random random, bool playerDefending)
+        {
+            int damage = enemy.GetDamage();
+            bool skipDamage = false;
+
+            if (enemy is Goblin)
+            {
+                Console.WriteLine("Применяется критический урон.");
+            }
+            else if (enemy is Skeleton)
+            {
+                Console.WriteLine("Скелет игнорирует вашу защиту!");
+            }
+            else if (enemy is Magician)
+            {
+                if (damage == 0 && player.IsFrozen)
+                {
+                    skipDamage = true;
+                }
+            }
+            if (!skipDamage && !(enemy is Skeleton))
+            {
+                int playerDefense = player.GetDefense();
+
+                if (playerDefending)
+                {
+                    if (random.Next(100) < 40)
+                    {
+                        Console.WriteLine("Вы уклонились от атаки!");
+                        return;
+                    }
+                    else
+                    {
+                        int blockPercent = random.Next(70, 101);
+                        int blockedDamage = playerDefense * blockPercent / 100;
+                        damage = damage - blockedDamage;
+                        Console.WriteLine($"Блок снизил урон на {blockedDamage} ({blockPercent}% от защиты)");
+                    }
+                }
+                else
+                {
+                    damage = damage - playerDefense;
+                }
+            }
+            if (!skipDamage)
+            {
+                player.Health -= damage;
+                Console.WriteLine($"{enemy.Name} наносит вам {damage} урона.");
+                Console.WriteLine($"Ваше здоровье: {player.Health}/{player.MaxHealth}");
+            }
+        }
 
     }
 }
